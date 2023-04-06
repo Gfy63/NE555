@@ -9,9 +9,9 @@ Simulation of the function from a NE555 timer chip. ;)
 
 There are 2 modes: Pulse and delay.
 
-![Pulse](image/Pulse.png)
+![Pulse](images/Pulse.png)
 
-![Delay](image/Delay.png)
+![Delay](images/Delay.png)
 
 ## INSTALLATION & DOWNLOAD
 Install via the Arduino Library Manager, the PlatformIO Library Manager or download from [github](https://github.com/Gfy63/NE555.git)
@@ -74,6 +74,7 @@ NE555 blink( 100, 900, BlinkCB );
 Normally called from within ```setup()``` but can be updated at runtime.
 
 ```void enable( boolean enb )``` False freeze the timer and resume with true.
+
 ```boolean enable()``` Get the enable.
 
 ```void restart()``` Restart the timer. State and enable are set to true and on the next ```inspect()``` the callback function is called.
