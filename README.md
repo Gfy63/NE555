@@ -8,9 +8,9 @@ Simulation of the function from a NE555 timer chip. ;)
 * High and low state timing are undependent.
 
 There are 2 modes: Pulse and delay.
-
+### PULSE
 ![Pulse](images/Pulse.png)
-
+### DELAY
 ![Delay](images/Delay.png)
 
 ## INSTALLATION & DOWNLOAD
