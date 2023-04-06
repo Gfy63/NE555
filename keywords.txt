@@ -1,0 +1,29 @@
+
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+NE555 KEYWORD1
+CallbackFunction KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+inspect KEYWORD2
+restart KEYWORD2
+interval KEYWORD2
+intervalH KEYWORD2
+intervalL KEYWORD2
+enable KEYWORD2
+state KEYWORD2
+
+#######################################
+# Structure (KEYWORD3)
+#######################################
+
+######################################
+# Constants (LITERAL1)
+#######################################
