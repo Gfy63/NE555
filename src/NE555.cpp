@@ -13,29 +13,27 @@
  * --- PUBLIC FUNCTIONS ---
 */
 
-NE555::NE555( unsigned long interval )
+NE555::NE555( unsigned long highTimer )
 {
-    _intervalH = interval;
-    _intervalL = interval;
+    _intervalH = _intervalL = highTimer;
 }
 
-NE555::NE555( unsigned long intervalHight, unsigned long intervalLow )
+NE555::NE555( unsigned long highTimer, unsigned long lowTimer )
 {
-    _intervalH = intervalHight;
-    _intervalL = intervalLow;
+    _intervalH = highTimer;
+    _intervalL = lowTimer;
 }
 
-NE555::NE555( unsigned long interval, CallbackFunction cb )
+NE555::NE555( unsigned long highTimer, CallbackFunction cb )
 {
-    _intervalH = interval;
-    _intervalL = interval;
+    _intervalH = _intervalL = highTimer;
     _stateChange_cb = cb;
 }
 
-NE555::NE555( unsigned long intervalHight, unsigned long intervalLow, CallbackFunction cb )
+NE555::NE555( unsigned long highTimer, unsigned long lowTimer, CallbackFunction cb )
 {
-    _intervalH = intervalHight;
-    _intervalL = intervalLow;
+    _intervalH = highTimer;
+    _intervalL = lowTimer;
     _stateChange_cb = cb;
 }
 
@@ -69,40 +67,73 @@ bool NE555::inspect( void )
 void NE555::restart( void )
 {
     _mode = MODE_PULSE;
-    _state = false;
-    _enable = true;
-    _previouse = millis() - _intervalL;      // Provoke a Callback fire next inspect().
-    _expiered = 0;
+
+    SetupRestart();
+    // _state = false;
+    // _enable = true;
+    // _previouse = millis() - _intervalL;      // Provoke a Callback fire next inspect().
+    // _expiered = 0;
 
 } // restart()
 
-void NE555::delay( unsigned long t )
+void NE555::restart( unsigned long highTimer )
 {
-    _intervalL = t;     // Start with low!
+    _intervalH = _intervalL = highTimer;
+
+    _mode = MODE_PULSE;
+
+    SetupRestart();
+    // _state = false;
+    // _enable = true;
+    // _previouse = millis() - _intervalL;      // Provoke a Callback fire next inspect().
+    // _expiered = 0;
+
+} // restart()
+
+void NE555::restart( unsigned long highTimer, unsigned long lowTimer )
+{
+    _intervalH = highTimer;
+    _intervalL = lowTimer;
+
+    _mode = MODE_PULSE;
+
+    SetupRestart();
+    // _state = false;
+    // _enable = true;
+    // _previouse = millis() - _intervalL;      // Provoke a Callback fire next inspect().
+    // _expiered = 0;
+
+} // restart()
+
+void NE555::delay( unsigned long lowTimer )
+{
+    _intervalL = lowTimer;     // Start with low!
 
     _mode = MODE_DELAY;
-    _state = false;
-    _enable = true;
-    _previouse = millis();
-    _expiered = 0;
+
+    SetupRestart();
+    // _state = false;
+    // _enable = true;
+    // _previouse = millis();
+    // _expiered = 0;
 
 } // delay()
 
-void NE555::interval( unsigned long invl )
-{ 
-    _intervalH = invl;
-    _intervalL = invl;
-} // interval()
+// void NE555::interval( unsigned long invl )
+// { 
+//     _intervalH = invl;
+//     _intervalL = invl;
+// } // interval()
 
-void NE555::intervalH( unsigned long invl ) { _intervalH = invl; }
-unsigned long NE555::intervalH( void ) { return _intervalH; }
+// void NE555::intervalH( unsigned long invl ) { _intervalH = invl; }
+// unsigned long NE555::intervalH( void ) { return _intervalH; }
 
-void NE555::intervalL( unsigned long invl ) { _intervalL = invl; }
-unsigned long NE555::intervalL( void ) { return _intervalL; }
+// void NE555::intervalL( unsigned long invl ) { _intervalL = invl; }
+// unsigned long NE555::intervalL( void ) { return _intervalL; }
 
-void NE555::enable( boolean enb ) 
+void NE555::enable( boolean enable ) 
 {
-    _enable = enb;
+    _enable = enable;
 
     if( _enable )
     {
@@ -117,5 +148,19 @@ void NE555::enable( boolean enb )
 
 bool NE555::enable( void ){ return _enable; }
 
-void NE555::state( boolean st ) { _state = st; }
+void NE555::state( boolean state ) { _state = state; }
 bool NE555::state( void ) { return _state; }
+
+/**
+ * --- PRIVATE FUNCTIONS ---
+*/
+void NE555::SetupRestart( void )
+{
+    _state = false;
+    _enable = true;
+    _previouse = millis();
+    if( _mode == MODE_PULSE ) _previouse -= _intervalL;      // Provoke a Callback fire next inspect().
+
+    _expiered = 0;
+
+}

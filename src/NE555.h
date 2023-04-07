@@ -25,15 +25,16 @@ class NE555
         /**
          * @brief   Constructors.
          * 
-         * @param   interval    Interval time in millis.
-         * @param   cb          State change callback function. (optional)
-         *                      Format: void cb( boolean state );
+         * @param   highTimer   Interval time for HIGH state in millis.
+         * @param   lowTimer    Interval time for LOW state in millis. (optional: Use 'invlHigh' if not used)
+         * @param   cb          Callback function for state change. Format: void cb( boolean state ); (optional)
+         *                      
          */
-        NE555( unsigned long interval );
-        NE555( unsigned long interval, CallbackFunction cb );
+        NE555( unsigned long highTimer );
+        NE555( unsigned long highTimer, CallbackFunction cb );
 
-        NE555( unsigned long intervalHight, unsigned long intervalLow );
-        NE555( unsigned long intervalHight, unsigned long intervalLow, CallbackFunction cb );
+        NE555( unsigned long highTimer, unsigned long lowTimer );
+        NE555( unsigned long highTimer, unsigned long lowTimer, CallbackFunction cb );
 
         /**
          * @brief   Inspect if the NE555 time is expiered.
@@ -44,64 +45,70 @@ class NE555
 
         /**
          * @brief   Restart the timer. First inspect() will fire the callback function with state is true.
+         * 
+         * @param   highTimer    Interval time for HIGH state in millis. (optional: Use old value)
+         * @param   lowTimer    Interval time for LOW state in millis. (optional: Use 'invlHigh' if not used)
          */
         void restart( void );
+        void restart( unsigned long highTimer );
+        void restart( unsigned long highTimer, unsigned long lowTimer );
 
         /**
          * @brief   Delay mode. Run only one time.
          * 
-         * @param   t    Delay in millis.
+         * @param   lowTimer     Delay in millis.
          */
-        void delay( unsigned long t );
+        void delay( unsigned long lowTimer );
 
-        /**
-         * @brief   Set the interval time for hight and low state.
-         * 
-         * @param   invl    Time in millis.
-         */
-        void interval( unsigned long invl );
+        // /**
+        //  * @brief   Set the interval time for hight and low state.
+        //  * 
+        //  * @param   invl    Time in millis.
+        //  */
+        // void interval( unsigned long invl );
 
-        /**
-         * @brief   Set the interval time for hight state.
-         * 
-         * @param   invl    Time in millis.
-         * 
-         * @return  Time in millis.
-         */
-        void intervalH( unsigned long invl );
-        unsigned long intervalH( void );
+        // /**
+        //  * @brief   Set the interval time for hight state.
+        //  * 
+        //  * @param   invl    Time in millis.
+        //  * 
+        //  * @return  Time in millis.
+        //  */
+        // void intervalH( unsigned long invl );
+        // unsigned long intervalH( void );
 
-        /**
-         * @brief   Set the interval time for low state.
-         * 
-         * @param   invl    Time in millis.
-         * 
-         * @return  Time in millis.
-         */
-        void intervalL( unsigned long invl );
-        unsigned long intervalL( void );
+        // /**
+        //  * @brief   Set the interval time for low state.
+        //  * 
+        //  * @param   invl    Time in millis.
+        //  * 
+        //  * @return  Time in millis.
+        //  */
+        // void intervalL( unsigned long invl );
+        // unsigned long intervalL( void );
        
         /**
-         * @brief   Get OR set enable.
+         * @brief   Get OR set the enable.
          * 
-         * @param   enb     Set the enable. True will also do a restart().
+         * @param   enable  Set the enable.
          * @return  Get the enable.
          */
-        void enable( boolean enb );
+        void enable( boolean enable );
         boolean enable( void );
         
         /**
          * @brief   Set OR get the state.
          * 
-         * @param   st      New state.
+         * @param   state   Set the state.
          * 
-         * @return  true / false
+         * @return  Get the state. (true/false)
          */
-        void state( boolean st );
+        void state( boolean state );
         bool state( void );
 
       
     private:
+        void SetupRestart( void );
 
         CallbackFunction _stateChange_cb = NULL;
         boolean _enable = false;        // If true, NE555 is running.
