@@ -10,6 +10,7 @@ Simulation of the function from a NE555 timer chip. ;)
 There are 2 modes: Pulse and delay.
 ### PULSE
 ![Pulse](images/Pulse.png)
+<img scr="./images/Pulse.png" width="100">
 
 ### DELAY
 ![Delay](images/Delay.png)
