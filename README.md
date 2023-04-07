@@ -13,9 +13,12 @@ There are 2 modes: Pulse/Flash and delay.
 or
 <img src="https://github.com/Gfy63/NE555/blob/main/images/Flash.png" height="120">
 
+There are 2 modes: Pulse and delay.
+### PULSE
+![Pulse](images/Pulse.png)
 
 ### DELAY
-<img src="https://github.com/Gfy63/NE555/blob/main/images/Delay.png" height="120">
+![Delay](images/Delay.png)
 
 ## INSTALLATION & DOWNLOAD
 Install via the Arduino Library Manager, the PlatformIO Library Manager or download from [github](https://github.com/Gfy63/NE555.git)
