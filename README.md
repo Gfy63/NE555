@@ -10,7 +10,11 @@ Simulation of the function from a NE555 timer chip. ;)
 There are 2 modes: Pulse and delay.
 ### PULSE
 <img src="https://github.com/Gfy63/NE555/blob/main/images/Pulse.png" height="100">
+
 ### DELAY
+<img src="https://github.com/Gfy63/NE555/blob/main/images/Delay.png" height="100">+
+
+
 ![Delay](images/Delay.png)
 
 ## INSTALLATION & DOWNLOAD
