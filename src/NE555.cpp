@@ -69,10 +69,6 @@ void NE555::restart( void )
     _mode = MODE_PULSE;
 
     SetupRestart();
-    // _state = false;
-    // _enable = true;
-    // _previouse = millis() - _intervalL;      // Provoke a Callback fire next inspect().
-    // _expiered = 0;
 
 } // restart()
 
@@ -83,10 +79,6 @@ void NE555::restart( unsigned long highTimer )
     _mode = MODE_PULSE;
 
     SetupRestart();
-    // _state = false;
-    // _enable = true;
-    // _previouse = millis() - _intervalL;      // Provoke a Callback fire next inspect().
-    // _expiered = 0;
 
 } // restart()
 
@@ -98,10 +90,6 @@ void NE555::restart( unsigned long highTimer, unsigned long lowTimer )
     _mode = MODE_PULSE;
 
     SetupRestart();
-    // _state = false;
-    // _enable = true;
-    // _previouse = millis() - _intervalL;      // Provoke a Callback fire next inspect().
-    // _expiered = 0;
 
 } // restart()
 
@@ -112,24 +100,8 @@ void NE555::delay( unsigned long lowTimer )
     _mode = MODE_DELAY;
 
     SetupRestart();
-    // _state = false;
-    // _enable = true;
-    // _previouse = millis();
-    // _expiered = 0;
 
 } // delay()
-
-// void NE555::interval( unsigned long invl )
-// { 
-//     _intervalH = invl;
-//     _intervalL = invl;
-// } // interval()
-
-// void NE555::intervalH( unsigned long invl ) { _intervalH = invl; }
-// unsigned long NE555::intervalH( void ) { return _intervalH; }
-
-// void NE555::intervalL( unsigned long invl ) { _intervalL = invl; }
-// unsigned long NE555::intervalL( void ) { return _intervalL; }
 
 void NE555::enable( boolean enable ) 
 {
@@ -137,16 +109,18 @@ void NE555::enable( boolean enable )
 
     if( _enable )
     {
-        // Start timer.
-        _previouse = millis();
+        // True. Timer start.
+        _previouse = millis();      // Set start time.
     }
     else
     {
-        _expiered = millis() - _previouse;
+        // False. Timer freeze.
+        _expiered = millis() - _previouse;      // Save elapsed time.
     }
+    
 } // enable()
 
-bool NE555::enable( void ){ return _enable; }
+bool NE555::enable( void ) { return _enable; }
 
 void NE555::state( boolean state ) { _state = state; }
 bool NE555::state( void ) { return _state; }
@@ -159,8 +133,10 @@ void NE555::SetupRestart( void )
     _state = false;
     _enable = true;
     _previouse = millis();
-    if( _mode == MODE_PULSE ) _previouse -= _intervalL;      // Provoke a Callback fire next inspect().
+    if( _mode == MODE_PULSE ) _previouse -= _intervalL;      // Provoke a callback fire next inspect().
 
     _expiered = 0;
 
-}
+} // SetupRestart()
+
+// End of 'NE555.cpp'

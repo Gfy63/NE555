@@ -3,17 +3,17 @@
 Simulation of the function from a NE555 timer chip. ;)
 
 * State change with defined interval time, without stopping the ```loop()``` like ```Delay()```.
-* State change calls a defined callback function.
+* State changes calls a defined callback function it used.
 * Enable allow to freeze and resume the timer.
 * High and low state timing are independent.
 
-There are 2 modes: Pulse/Flash and delay.
-### PULSE / FLASH
+## MODE
+### PULSE
+Mode pulse also by flash.
 <img src="https://github.com/Gfy63/NE555/blob/main/images/Pulse.png" height="120">
-or
-<img src="https://github.com/Gfy63/NE555/blob/main/images/Flash.png" height="120">
 
 ### DELAY
+Delay fires the callback function only ones.
 <img src="https://github.com/Gfy63/NE555/blob/main/images/Delay.png" height="120">
 
 ## INSTALLATION & DOWNLOAD
@@ -54,6 +54,8 @@ Inspect the delayed time and change state if expired and call the callback funct
 First call fires always the callback function with state by high.
 
 ## Constructors
+For Pulse (blink and flash) or Delay the constructor are the same.
+
 Construct a blink function. (No callback function used)
 ```cpp
 NE555 blink( 1000 );
@@ -78,9 +80,11 @@ Normally called from within ```setup()``` but can be updated at runtime.
 
 ```boolean enable()``` Get the enable.
 
-```void restart()``` Restart the timer. State and enable are set to true and on the next ```inspect()``` the callback function is called.
-```void restart( unsigned long highTimer )``` Restart and change the blink time.
-```void restart( unsigned long highTimer, unsigned long lowTimer )``` Restart and change the flash time.
+```void restart()``` Restart the timer. State and enable are set to true and on the next ```inspect()``` the callback function is called. (Timer are unchanged)
+
+```void restart( unsigned long highTimer )``` Restart and change the pulse time. (High and low timer are the same and changed)
+
+```void restart( unsigned long highTimer, unsigned long lowTimer )``` Restart and change the pulse time. (High & low timer are changed)
 
 ```void delay( unsigned long lowTimer )``` Start delay. State is false, enable set to true. After the delay time the callback function is call one time.
 
