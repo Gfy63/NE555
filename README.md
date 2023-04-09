@@ -9,11 +9,13 @@ Simulation of the function from a NE555 timer chip. ;)
 
 ## MODE
 ### PULSE
-Mode pulse also by flash.
+Mode pulse can also by flash.
+
 <img src="https://github.com/Gfy63/NE555/blob/main/images/Pulse.png" height="120">
 
 ### DELAY
 Delay fires the callback function only ones.
+
 <img src="https://github.com/Gfy63/NE555/blob/main/images/Delay.png" height="120">
 
 ## INSTALLATION & DOWNLOAD
@@ -51,7 +53,8 @@ blink.restart();            // Restart & enable timer.
 blink.inspect();
 ```
 Inspect the delayed time and change state if expired and call the callback function if used.
-First call fires always the callback function with state by high.
+
+The first call of ```inspect()``` fires always the callback function with state by high.
 
 ## Constructors
 For Pulse (blink and flash) or Delay the constructor are the same.
