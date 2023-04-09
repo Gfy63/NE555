@@ -14,9 +14,6 @@ CallbackFunction KEYWORD1
 #######################################
 inspect KEYWORD2
 restart KEYWORD2
-interval KEYWORD2
-intervalH KEYWORD2
-intervalL KEYWORD2
 enable KEYWORD2
 state KEYWORD2
 
